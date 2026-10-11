@@ -9,3 +9,6 @@ dev-dist
 .DS_Store
 supabase/.temp
 supabase/.branches
+
+# Local-only keys (never commit)
+.secrets/
