@@ -1,0 +1,84 @@
+# Builds the mobile apps in the cloud:
+#   • Android: a debug APK you can install on any phone (download it from the run's "Artifacts").
+#   • iOS:     a simulator build on a macOS runner, proving the iOS app compiles.
+#              (Shipping to TestFlight/App Store needs signing — see README.)
+#
+# Add these repository variables (Settings → Secrets and variables → Actions → Variables):
+#   VITE_SUPABASE_URL, VITE_SUPABASE_KEY, VITE_SITE_URL
+# and optionally VITE_VAPID_PUBLIC_KEY, VITE_NATIVE_PUSH (true once Firebase/APNs are set up).
+name: Mobile apps
+
+on:
+  push:
+    branches: [main]
+    paths-ignore: ['**.md']
+  workflow_dispatch:
+    inputs:
+      ios:
+        description: Also build iOS (uses macOS minutes)
+        type: boolean
+        default: true
+
+env:
+  VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
+  VITE_SUPABASE_KEY: ${{ vars.VITE_SUPABASE_KEY }}
+  VITE_SITE_URL: ${{ vars.VITE_SITE_URL }}
+  VITE_VAPID_PUBLIC_KEY: ${{ vars.VITE_VAPID_PUBLIC_KEY }}
+  VITE_NATIVE_PUSH: ${{ vars.VITE_NATIVE_PUSH }}
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    env:
+      # Optional secret: the contents of google-services.json from Firebase.
+      GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+      - run: npm ci
+      - run: npm run build
+      - run: npx cap sync android
+      - name: Use the site domain for App Links
+        if: ${{ vars.VITE_SITE_URL != '' }}
+        run: node scripts/set-domain.mjs "${{ vars.VITE_SITE_URL }}"
+      - name: Firebase config (for push notifications)
+        if: ${{ env.GOOGLE_SERVICES_JSON != '' }}
+        run: printf '%s' "$GOOGLE_SERVICES_JSON" > android/app/google-services.json
+      - name: Build APK
+        working-directory: android
+        run: chmod +x gradlew && ./gradlew assembleDebug --no-daemon
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pickup-android-debug
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+
+  ios:
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.ios }}
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npx cap sync ios
+      - name: Build for the iOS Simulator (unsigned)
+        run: |
+          xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Debug \
+            -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath build CODE_SIGNING_ALLOWED=NO build
+      - name: Zip the simulator app
+        run: cd build/Build/Products/Debug-iphonesimulator && zip -qr Pickup-simulator.zip App.app
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pickup-ios-simulator
+          path: build/Build/Products/Debug-iphonesimulator/Pickup-simulator.zip

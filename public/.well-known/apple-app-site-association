@@ -1,0 +1,10 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["APPLE_TEAM_ID.com.pickupsports.app"],
+        "components": [{ "/": "/games/*", "comment": "Game links open in the Pickup app" }]
+      }
+    ]
+  }
+}
