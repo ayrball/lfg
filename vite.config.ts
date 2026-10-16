@@ -15,8 +15,8 @@ export default defineConfig({
       injectRegister: false,
       includeAssets: ['favicon.ico', 'apple-touch-icon-180x180.png', 'logo.svg'],
       manifest: {
-        name: 'Pickup — find a game near you',
-        short_name: 'Pickup',
+        name: 'LFG — find a game near you',
+        short_name: 'LFG',
         description: 'Host and join pickup games at venues near you.',
         theme_color: '#16a34a',
         background_color: '#0f172a',

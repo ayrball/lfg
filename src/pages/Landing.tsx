@@ -31,7 +31,7 @@ export function Landing() {
       <header className="landing__nav">
         <span className="brand">
           <img src="/logo.svg" alt="" width={28} height={28} />
-          Pickup
+          LFG
         </span>
         <button className="btn btn--outline btn--sm" onClick={() => setShowLogin(true)}>
           Sign in
@@ -80,7 +80,7 @@ export function Landing() {
         </div>
       </section>
 
-      <footer className="landing__footer muted small">Pickup · Find your next game</footer>
+      <footer className="landing__footer muted small">LFG · Looking for game</footer>
     </div>
   );
 }

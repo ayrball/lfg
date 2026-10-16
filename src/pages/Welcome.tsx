@@ -52,7 +52,7 @@ export function Welcome() {
 
       {step === 0 && (
         <div className="stack form">
-          <h1>Welcome to Pickup 👋</h1>
+          <h1>Welcome to LFG 👋</h1>
           <p className="muted">Tell us what you play and we'll ping you when a game starts nearby.</p>
           <label>
             Your name

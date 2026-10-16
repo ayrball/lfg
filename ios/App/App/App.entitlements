@@ -9,7 +9,7 @@
 	     Change the domain with the set-domain script (see README). -->
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>applinks:pickup.example.com</string>
+		<string>applinks:lfg.example.com</string>
 	</array>
 </dict>
 </plist>

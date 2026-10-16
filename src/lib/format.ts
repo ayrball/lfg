@@ -68,9 +68,9 @@ export function buildIcs(g: { id: string; title: string; venue_name: string; ven
   return [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
-    'PRODID:-//Pickup//EN',
+    'PRODID:-//LFG//EN',
     'BEGIN:VEVENT',
-    `UID:${g.id}@pickup`,
+    `UID:${g.id}@lfg`,
     `DTSTAMP:${fmt(new Date())}`,
     `DTSTART:${fmt(start)}`,
     `DTEND:${fmt(end)}`,

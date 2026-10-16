@@ -4,8 +4,8 @@ import type { CapacitorConfig } from '@capacitor/cli';
 // same Supabase backend as the website, so accounts, games, RSVPs and chat are
 // shared across all three.
 const config: CapacitorConfig = {
-  appId: 'com.pickupsports.app',
-  appName: 'Pickup',
+  appId: 'com.ayrball.lfg',
+  appName: 'LFG',
   webDir: 'dist',
   android: {
     // Lets the WebView use the https://localhost origin (needed for geolocation & storage).
@@ -13,7 +13,6 @@ const config: CapacitorConfig = {
   },
   ios: {
     contentInset: 'never',
-    scheme: 'Pickup',
   },
   plugins: {
     SplashScreen: {

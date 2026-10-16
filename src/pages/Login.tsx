@@ -41,7 +41,7 @@ export function Login({ embedded = false }: { embedded?: boolean }) {
       {!embedded && (
         <div className="auth__hero">
           <img src="/logo.svg" alt="" width={64} height={64} />
-          <h1>Pickup</h1>
+          <h1>LFG</h1>
           <p>Find a game near you — or host one and fill it in minutes.</p>
         </div>
       )}

@@ -12,7 +12,7 @@ export const isNative = Capacitor.isNativePlatform();
 export const platform = Capacitor.getPlatform() as 'web' | 'android' | 'ios';
 
 /** Custom URL scheme the apps register; used to return from Google sign-in. */
-export const APP_SCHEME = 'com.pickupsports.app';
+export const APP_SCHEME = 'com.ayrball.lfg';
 export const OAUTH_REDIRECT = `${APP_SCHEME}://auth-callback`;
 
 /**

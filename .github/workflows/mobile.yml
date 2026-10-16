@@ -56,7 +56,7 @@ jobs:
         run: chmod +x gradlew && ./gradlew assembleDebug --no-daemon
       - uses: actions/upload-artifact@v4
         with:
-          name: pickup-android-debug
+          name: lfg-android-debug
           path: android/app/build/outputs/apk/debug/app-debug.apk
 
   ios:
@@ -77,8 +77,8 @@ jobs:
             -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' \
             -derivedDataPath build CODE_SIGNING_ALLOWED=NO build
       - name: Zip the simulator app
-        run: cd build/Build/Products/Debug-iphonesimulator && zip -qr Pickup-simulator.zip App.app
+        run: cd build/Build/Products/Debug-iphonesimulator && zip -qr LFG-simulator.zip App.app
       - uses: actions/upload-artifact@v4
         with:
-          name: pickup-ios-simulator
-          path: build/Build/Products/Debug-iphonesimulator/Pickup-simulator.zip
+          name: lfg-ios-simulator
+          path: build/Build/Products/Debug-iphonesimulator/LFG-simulator.zip

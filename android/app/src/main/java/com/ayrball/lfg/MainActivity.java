@@ -1,4 +1,4 @@
-package com.pickupsports.app;
+package com.ayrball.lfg;
 
 import com.getcapacitor.BridgeActivity;
 

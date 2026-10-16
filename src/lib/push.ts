@@ -28,7 +28,7 @@ export function isStandalone() {
 // Native (Android / iOS apps)
 // ---------------------------------------------------------------------------
 
-const NATIVE_FLAG = 'pickup.nativePush';
+const NATIVE_FLAG = 'lfg.nativePush';
 
 function readFlag() {
   try {

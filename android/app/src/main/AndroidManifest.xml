@@ -22,16 +22,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
-            <!-- Return from Google sign-in: com.pickupsports.app://auth-callback -->
+            <!-- Return from Google sign-in: com.ayrball.lfg://auth-callback -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="com.pickupsports.app" android:host="auth-callback" />
+                <data android:scheme="com.ayrball.lfg" android:host="auth-callback" />
             </intent-filter>
 
             <!-- App Links: https://<your domain>/games/... opens straight in the app.
-                 The domain comes from pickupDomain in android/gradle.properties
+                 The domain comes from appDomain in android/gradle.properties
                  (set it with the set-domain script, see README). -->
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />

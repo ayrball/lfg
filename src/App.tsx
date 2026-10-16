@@ -69,7 +69,7 @@ function Unreachable({ message }: { message: string }) {
   return (
     <div className="auth">
       <div className="card stack">
-        <h1>Can't reach Pickup</h1>
+        <h1>Can't reach LFG</h1>
         <p className="muted">Check your connection and try again. ({message})</p>
         <button
           className="btn btn--primary"

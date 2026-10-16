@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Pickup</string>
-    <string name="title_activity_main">Pickup</string>
-    <string name="package_name">com.pickupsports.app</string>
-    <string name="custom_url_scheme">com.pickupsports.app</string>
+    <string name="app_name">LFG</string>
+    <string name="title_activity_main">LFG</string>
+    <string name="package_name">com.ayrball.lfg</string>
+    <string name="custom_url_scheme">com.ayrball.lfg</string>
 </resources>

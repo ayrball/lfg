@@ -37,7 +37,7 @@ self.addEventListener('push', (event) => {
   const body = [when, data.body].filter(Boolean).join(' · ');
 
   event.waitUntil(
-    self.registration.showNotification(data.title ?? 'Pickup', {
+    self.registration.showNotification(data.title ?? 'LFG', {
       body,
       icon: '/pwa-192x192.png',
       badge: '/pwa-64x64.png',

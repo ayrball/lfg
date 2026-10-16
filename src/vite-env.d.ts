@@ -4,7 +4,7 @@ interface ImportMetaEnv {
   readonly VITE_SUPABASE_URL?: string;
   readonly VITE_SUPABASE_KEY?: string;
   readonly VITE_VAPID_PUBLIC_KEY?: string;
-  /** Public website, e.g. https://pickup.example.com — used for share links from the apps. */
+  /** Public website, e.g. https://lfg.example.com — used for share links from the apps. */
   readonly VITE_SITE_URL?: string;
   /** 'true' once Firebase (Android) / APNs (iOS) push is configured. */
   readonly VITE_NATIVE_PUSH?: string;

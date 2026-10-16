@@ -95,7 +95,7 @@ export function PushToggle({ onError }: { onError: (msg: string) => void }) {
       {push === 'unsupported' &&
         (isIos() && !isStandalone() ? (
           <p className="hint">
-            On iPhone, tap <strong>Share → Add to Home Screen</strong>, then open Pickup from your home screen to turn on
+            On iPhone, tap <strong>Share → Add to Home Screen</strong>, then open LFG from your home screen to turn on
             push notifications.
           </p>
         ) : (
@@ -111,7 +111,7 @@ export function PushToggle({ onError }: { onError: (msg: string) => void }) {
       {push === 'denied' && (
         <p className="hint">
           {isNative
-            ? 'Notifications are turned off for Pickup. Turn them on in your phone settings.'
+            ? 'Notifications are turned off for LFG. Turn them on in your phone settings.'
             : "Notifications are blocked for this site. Allow them in your browser's site settings."}
         </p>
       )}

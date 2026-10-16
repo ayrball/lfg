@@ -40,7 +40,7 @@ export function Layout() {
       <header className="topbar">
         <Link to="/" className="brand">
           <img src="/logo.svg" alt="" width={28} height={28} />
-          Pickup
+          LFG
         </Link>
         <Link to="/notifications" className="icon-btn" aria-label={`Notifications${unread ? ` (${unread} unread)` : ''}`}>
           🔔

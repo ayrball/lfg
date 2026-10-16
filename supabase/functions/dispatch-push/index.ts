@@ -12,7 +12,7 @@
 //   VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY, VAPID_SUBJECT          (website)
 //   FCM_SERVICE_ACCOUNT  (the Firebase service-account JSON)      (Android)
 //   APNS_KEY_ID, APNS_TEAM_ID, APNS_PRIVATE_KEY (.p8 contents),
-//   APNS_BUNDLE_ID (default com.pickupsports.app), APNS_SANDBOX=true for dev builds (iOS)
+//   APNS_BUNDLE_ID (default com.ayrball.lfg), APNS_SANDBOX=true for dev builds (iOS)
 import { createClient } from 'npm:@supabase/supabase-js@2';
 import webpush from 'npm:web-push@3.6.7';
 import { importPKCS8, SignJWT } from 'npm:jose@5.9.6';
@@ -154,7 +154,7 @@ async function sendApns(token: string, m: Message): Promise<Result> {
     method: 'POST',
     headers: {
       authorization: `bearer ${await apnsToken()}`,
-      'apns-topic': env('APNS_BUNDLE_ID') || 'com.pickupsports.app',
+      'apns-topic': env('APNS_BUNDLE_ID') || 'com.ayrball.lfg',
       'apns-push-type': 'alert',
       'apns-priority': '10',
       ...(m.tag ? { 'apns-collapse-id': m.tag.slice(0, 64) } : {}),

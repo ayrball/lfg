@@ -2,8 +2,8 @@
   "applinks": {
     "details": [
       {
-        "appIDs": ["APPLE_TEAM_ID.com.pickupsports.app"],
-        "components": [{ "/": "/games/*", "comment": "Game links open in the Pickup app" }]
+        "appIDs": ["APPLE_TEAM_ID.com.ayrball.lfg"],
+        "components": [{ "/": "/games/*", "comment": "Game links open in the LFG app" }]
       }
     ]
   }

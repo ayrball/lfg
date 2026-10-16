@@ -47,7 +47,7 @@ export function describeGame(g: PublicGame, timeZone = 'UTC'): { title: string; 
     g.status === 'cancelled' ? 'Cancelled' : spots > 0 ? `${spots} spot${spots === 1 ? '' : 's'} left` : 'Full — join the waitlist';
   return {
     title: `${EMOJI[g.sport] ?? '🏅'} ${g.title} · ${when}`,
-    description: `${g.venue_name} · ${g.going_count}/${g.max_players} going · ${status}. Join on Pickup.`,
+    description: `${g.venue_name} · ${g.going_count}/${g.max_players} going · ${status}. Join on LFG.`,
   };
 }
 
@@ -56,7 +56,7 @@ export function injectMeta(html: string, meta: { title: string; description: str
   const d = escapeHtml(meta.description);
   const tags = [
     `<meta property="og:type" content="website" />`,
-    `<meta property="og:site_name" content="Pickup" />`,
+    `<meta property="og:site_name" content="LFG" />`,
     `<meta property="og:title" content="${t}" />`,
     `<meta property="og:description" content="${d}" />`,
     `<meta property="og:url" content="${escapeHtml(meta.url)}" />`,

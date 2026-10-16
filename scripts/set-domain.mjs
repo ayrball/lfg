@@ -2,8 +2,8 @@
 // Points the website, Android app and iOS app at your real domain so shared
 // game links open straight in the apps.
 //
-//   npm run set-domain -- pickup.mydomain.com
-//   npm run set-domain -- pickup.mydomain.com --team ABCDE12345 --sha256 AA:BB:…
+//   npm run set-domain -- lfg.mydomain.com
+//   npm run set-domain -- lfg.mydomain.com --team ABCDE12345 --sha256 AA:BB:…
 //
 //   --team    Apple Developer Team ID (developer.apple.com → Membership)
 //   --sha256  SHA-256 fingerprint of the key that signs your Android app
@@ -36,7 +36,7 @@ function update(file, fn) {
 }
 
 console.log(`Setting domain to ${host}`);
-update('android/gradle.properties', (s) => s.replace(/^pickupDomain=.*$/m, `pickupDomain=${host}`));
+update('android/gradle.properties', (s) => s.replace(/^appDomain=.*$/m, `appDomain=${host}`));
 update('ios/App/App/App.entitlements', (s) => s.replace(/<string>applinks:[^<]*<\/string>/, `<string>applinks:${host}</string>`));
 for (const envFile of ['.env.local', '.env.production']) {
   update(envFile, (s) => (/^VITE_SITE_URL=.*$/m.test(s) ? s.replace(/^VITE_SITE_URL=.*$/m, `VITE_SITE_URL=https://${host}`) : `${s.trimEnd()}\nVITE_SITE_URL=https://${host}\n`));
@@ -44,7 +44,7 @@ for (const envFile of ['.env.local', '.env.production']) {
 
 const [team] = flag('team');
 if (team) {
-  update('public/.well-known/apple-app-site-association', (s) => s.replace(/"[A-Z0-9_]+\.com\.pickupsports\.app"/, `"${team}.com.pickupsports.app"`));
+  update('public/.well-known/apple-app-site-association', (s) => s.replace(/"[A-Z0-9_]+\.com\.ayrball\.lfg"/, `"${team}.com.ayrball.lfg"`));
 }
 const shas = flag('sha256');
 if (shas.length) {

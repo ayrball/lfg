@@ -1,6 +1,6 @@
-# Pickup 🏟️
+# LFG 🏟️
 
-Find a pickup game near you, or host one and fill it fast.
+**LFG — Looking for game.** Find a pickup game near you, or host one and fill it fast.
 
 - **Host a game** at a venue (search or drop a pin), set time, player limits and skill level — with sensible defaults per sport
 - **Pings**: everyone within your chosen radius (5–50 mi) who plays that sport gets notified (push + in-app inbox).
@@ -32,8 +32,8 @@ Leaflet + OpenStreetMap · Photon place search · Web Push (VAPID) · Cloudflare
      npx supabase db push
      ```
 3. **Auth settings** (Dashboard → Authentication):
-   - *URL Configuration*: set **Site URL** to your domain (e.g. `https://pickup.yourdomain.com`) and add
-     `http://localhost:5641/**` and `https://pickup.yourdomain.com/**` to **Redirect URLs**.
+   - *URL Configuration*: set **Site URL** to your domain (e.g. `https://lfg.yourdomain.com`) and add
+     `http://localhost:5641/**` and `https://lfg.yourdomain.com/**` to **Redirect URLs**.
    - *Email*: Supabase's built-in mailer only sends a few emails per hour and only to your team's addresses,
      so for real users either **turn off “Confirm email”** (simplest to start) or add free custom SMTP
      (e.g. [Resend](https://resend.com), 3,000 emails/month) under *Authentication → SMTP*.
@@ -78,7 +78,7 @@ npm run dev
 2. Cloudflare dashboard → Workers & Pages → Create → Pages → connect the repo.
    Build command `npm run build`, output directory `dist`.
 3. Add environment variables `VITE_SUPABASE_URL`, `VITE_SUPABASE_KEY`, `VITE_VAPID_PUBLIC_KEY`.
-4. Custom domains → add `pickup.yourdomain.com` (Cloudflare sets up DNS + HTTPS).
+4. Custom domains → add `lfg.yourdomain.com` (Cloudflare sets up DNS + HTTPS).
 5. Add that domain to Supabase **Site URL / Redirect URLs** (step 1.3).
 
 Shared game links get rich previews (title, time, spots left) from the Pages Function in
@@ -115,7 +115,7 @@ npm run set-domain -- yourdomain.com --team YOUR_APPLE_TEAM_ID --sha256 YOUR_AND
 ```
 
 This updates the Android and iOS projects plus the two verification files in `public/.well-known/` that your
-website must serve. Also add `com.pickupsports.app://auth-callback` to Supabase **Redirect URLs** so Google
+website must serve. Also add `com.ayrball.lfg://auth-callback` to Supabase **Redirect URLs** so Google
 sign-in can return to the app.
 
 ### Android
@@ -141,14 +141,14 @@ Building iOS apps requires a Mac with Xcode (Apple's rule). Options:
 
 Players always get the 🔔 inbox. For phone notifications:
 
-- **Android (Firebase, free):** create a Firebase project → add an Android app with package `com.pickupsports.app` →
+- **Android (Firebase, free):** create a Firebase project → add an Android app with package `com.ayrball.lfg` →
   download `google-services.json` into `android/app/` (or save it as the `GOOGLE_SERVICES_JSON` GitHub secret).
   Then *Project settings → Service accounts → Generate new private key* and store it on Supabase:
   ```bash
   npx supabase secrets set FCM_SERVICE_ACCOUNT="$(cat path/to/service-account.json)"
   ```
 - **iPhone (APNs):** in the Apple Developer portal create an APNs key (*Keys → +*, enable Apple Push Notifications)
-  and enable the Push Notifications capability for `com.pickupsports.app`. Then:
+  and enable the Push Notifications capability for `com.ayrball.lfg`. Then:
   ```bash
   npx supabase secrets set APNS_KEY_ID=ABC123 APNS_TEAM_ID=YOUR_TEAM_ID APNS_PRIVATE_KEY="$(cat AuthKey_ABC123.p8)"
   ```
