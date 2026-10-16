@@ -1,5 +1,5 @@
 import { lazy, useEffect, useState } from 'react';
-import { BrowserRouter, Navigate, Route, Routes, useNavigate } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './lib/auth';
 import { supabase, supabaseConfigured } from './lib/supabase';
 import { Layout } from './components/Layout';
@@ -7,6 +7,7 @@ import { Login } from './pages/Login';
 import { Welcome } from './pages/Welcome';
 import { PublicGame } from './pages/PublicGame';
 import { Landing } from './pages/Landing';
+import { About } from './pages/About';
 import { initNative, isNative } from './lib/native';
 import { onNativeNotificationTap, refreshNativePush } from './lib/push';
 
@@ -37,14 +38,17 @@ function NativeBridge() {
 
 function Routed() {
   const { loading, session, profile, loadError } = useAuth();
+  // Subscribe to navigation so the signed-out screens below follow <Link> clicks.
+  const { pathname } = useLocation();
   if (loading) return <div className="splash">Loading…</div>;
   // Signed-out users stay on the URL they opened, so shared game links work
   // after signing in. Game links show a public preview first.
   if (!session) {
-    const gameId = window.location.pathname.match(/^\/games\/([0-9a-f-]{36})\/?$/i)?.[1];
+    const gameId = pathname.match(/^\/games\/([0-9a-f-]{36})\/?$/i)?.[1];
     if (gameId) return <PublicGame gameId={gameId} />;
+    if (pathname === '/about') return <About standalone />;
     // The website gets a landing page; the apps go straight to sign-in.
-    return isNative || window.location.pathname !== '/' ? <Login /> : <Landing />;
+    return isNative || pathname !== '/' ? <Login /> : <Landing />;
   }
   if (loadError) return <Unreachable message={loadError} />;
   if (profile && !profile.onboarded) return <Welcome />;
@@ -57,6 +61,7 @@ function Routed() {
         <Route path="games/:id/edit" element={<EditGame />} />
         <Route path="me" element={<Profile />} />
         <Route path="notifications" element={<Notifications />} />
+        <Route path="about" element={<About />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Routes>

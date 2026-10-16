@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from 'react';
+import { Link } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../lib/auth';
 import { useBlocks } from '../lib/safety';
@@ -147,7 +148,9 @@ export function Profile() {
       )}
 
       <hr />
-      <p className="muted small">Signed in as {session?.user.email}</p>
+      <p className="muted small">
+        Signed in as {session?.user.email} · <Link to="/about">About LFG</Link>
+      </p>
       <button type="button" className="btn btn--ghost" onClick={() => supabase.auth.signOut()}>
         Sign out
       </button>

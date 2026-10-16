@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Login } from './Login';
 import { SPORTS } from '../lib/sports';
 
@@ -33,9 +34,14 @@ export function Landing() {
           <img src="/logo.svg" alt="" width={28} height={28} />
           LFG
         </span>
-        <button className="btn btn--outline btn--sm" onClick={() => setShowLogin(true)}>
-          Sign in
-        </button>
+        <nav className="landing__links">
+          <Link to="/about" className="link">
+            What is LFG?
+          </Link>
+          <button className="btn btn--outline btn--sm" onClick={() => setShowLogin(true)}>
+            Sign in
+          </button>
+        </nav>
       </header>
 
       <section className="landing__hero">
@@ -51,6 +57,9 @@ export function Landing() {
           <button className="btn btn--primary" onClick={() => setShowLogin(true)}>
             Find a game — it's free
           </button>
+          <Link to="/about" className="btn btn--outline">
+            How it works
+          </Link>
         </div>
       </section>
 
@@ -80,7 +89,9 @@ export function Landing() {
         </div>
       </section>
 
-      <footer className="landing__footer muted small">LFG · Looking for game</footer>
+      <footer className="landing__footer muted small">
+        LFG · Looking for game · <Link to="/about">About</Link>
+      </footer>
     </div>
   );
 }
