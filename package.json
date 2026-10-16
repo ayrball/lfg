@@ -12,7 +12,8 @@
     "android": "npm run build && cap sync android && cap open android",
     "android:apk": "npm run build && cap sync android && cd android && gradlew assembleDebug",
     "ios": "npm run build && cap sync ios && cap open ios",
-    "generate-app-icons": "capacitor-assets generate --android --ios --iconBackgroundColor \"#16a34a\" --iconBackgroundColorDark \"#16a34a\" --splashBackgroundColor \"#16a34a\" --splashBackgroundColorDark \"#0b1210\""
+    "generate-app-icons": "capacitor-assets generate --android --ios --iconBackgroundColor \"#16a34a\" --iconBackgroundColorDark \"#16a34a\" --splashBackgroundColor \"#16a34a\" --splashBackgroundColorDark \"#0b1210\"",
+    "deploy:web": "npm run build && npx wrangler@4 pages deploy dist --project-name lfg-tenziki --branch main"
   },
   "type": "module",
   "dependencies": {
